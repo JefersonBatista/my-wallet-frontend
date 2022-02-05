@@ -36,12 +36,6 @@ export default function Login() {
     }
   }
 
-  useEffect(() => {
-    if (token) {
-      navigate("/transactions");
-    }
-  }, [token]);
-
   return (
     <LoginPage>
       <Logo />

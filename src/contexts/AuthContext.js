@@ -14,7 +14,9 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    if (!token) {
+    if (token) {
+      navigate("/transactions");
+    } else {
       navigate("/");
     }
   }, [token]);

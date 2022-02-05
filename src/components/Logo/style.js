@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LogoStyle = styled.h1`
+export const LogoStyle = styled.header`
   align-self: center;
 
   font-family: "Saira Stencil One", cursive;
