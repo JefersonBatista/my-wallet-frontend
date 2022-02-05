@@ -8,7 +8,12 @@ const Entry = styled.input`
   border-style: none;
   background-color: white;
 
+  font-family: "Raleway", sans-serif;
   font-size: 20px;
+
+  ::placeholder {
+    font-family: "Raleway", sans-serif;
+  }
 `;
 
 export default Entry;

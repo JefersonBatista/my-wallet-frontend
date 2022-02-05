@@ -6,6 +6,7 @@ const PageLink = styled(Link)`
 
   font-weight: bold;
   font-size: 15px;
+  text-decoration: none;
   color: white;
 `;
 
