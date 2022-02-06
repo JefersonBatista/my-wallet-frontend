@@ -6,24 +6,24 @@ function createAuth(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
 }
 
-async function signUp(newUser) {
-  return await axios.post(`${BASE_URL}/sign-up`, newUser);
+function signUp(newUser) {
+  return axios.post(`${BASE_URL}/sign-up`, newUser);
 }
 
 function login(login) {
   return axios.post(`${BASE_URL}/login`, login);
 }
 
-async function logout(token) {
-  return await axios.post(`${BASE_URL}/logout`, {}, createAuth(token));
+function logout(token) {
+  return axios.post(`${BASE_URL}/logout`, {}, createAuth(token));
 }
 
-async function getTransactions(token) {
-  return await axios.get(`${BASE_URL}/transactons`, createAuth(token));
+function getTransactions(token) {
+  return axios.get(`${BASE_URL}/transactions`, createAuth(token));
 }
 
-async function postTransactions(token, newTransaction) {
-  return await axios.post(
+function postTransactions(token, newTransaction) {
+  return axios.post(
     `${BASE_URL}/transactions`,
     newTransaction,
     createAuth(token)

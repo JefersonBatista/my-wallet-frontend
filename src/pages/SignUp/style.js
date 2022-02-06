@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SignUpForm = styled.form`
+export const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -14,12 +14,10 @@ const SignUpForm = styled.form`
   }
 `;
 
-const SignUpPage = styled.section`
+export const SignUpPage = styled.section`
   display: flex;
   flex-direction: column;
   margin: auto 0;
 
   width: 100%;
 `;
-
-export { SignUpForm, SignUpPage };

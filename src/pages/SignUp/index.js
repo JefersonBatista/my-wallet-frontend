@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import api from "../../services/api";
 import Logo from "../../components/Logo";
@@ -24,14 +24,16 @@ export default function SignUp() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    try {
-      if (formData.password !== formData.repeatPassword) {
-        alert("Você inseriu senhas diferentes");
-        return;
-      }
-      delete formData.repeatPassword;
+    if (formData.password !== formData.repeatPassword) {
+      alert("Você inseriu senhas diferentes");
+      return;
+    }
 
-      await api.signUp(formData);
+    const newUserData = { ...formData };
+    delete newUserData.repeatPassword;
+
+    try {
+      await api.signUp(newUserData);
 
       navigate("/");
     } catch (error) {
@@ -70,6 +72,7 @@ export default function SignUp() {
           name="repeatPassword"
           placeholder="Confirme a senha"
           onChange={handleChange}
+          value={formData.repeatPassword}
         />
         <Button type="submit">
           <span className="button-text">Cadastrar</span>

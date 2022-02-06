@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
 
-  const { token, setAndPersistToken } = useAuth();
+  const { setAndPersistToken } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",

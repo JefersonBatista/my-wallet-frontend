@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoginForm = styled.form`
+export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -14,12 +14,10 @@ const LoginForm = styled.form`
   }
 `;
 
-const LoginPage = styled.section`
+export const LoginPage = styled.section`
   display: flex;
   flex-direction: column;
   margin: auto 0;
 
   width: 100%;
 `;
-
-export { LoginForm, LoginPage };
