@@ -22,7 +22,7 @@ function getTransactions(token) {
   return axios.get(`${BASE_URL}/transactions`, createAuth(token));
 }
 
-function postTransactions(token, newTransaction) {
+function registerTransaction(token, newTransaction) {
   return axios.post(
     `${BASE_URL}/transactions`,
     newTransaction,
@@ -35,7 +35,7 @@ const api = {
   login,
   logout,
   getTransactions,
-  postTransactions,
+  registerTransaction,
 };
 
 export default api;

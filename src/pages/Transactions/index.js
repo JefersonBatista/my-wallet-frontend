@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { Button, Title } from "../../styles";
-import logoutIcon from "../../assets/logout.svg";
-import plusIcon from "../../assets/plus.svg";
-import minusIcon from "../../assets/minus.svg";
+import logoutIcon from "../../icons/logout.svg";
+import plusIcon from "../../icons/plus.svg";
+import minusIcon from "../../icons/minus.svg";
 
 import Transaction from "../../components/Transaction";
 import { TransactionsPage, Header, List, Footer } from "./style";
@@ -31,7 +31,6 @@ export default function Transactions() {
         const transactionsData = response.data;
         transactionsData.list.sort((t1, t2) => t2.timestamp - t1.timestamp);
         setTransactions(transactionsData);
-        // setTransactions(response.data);
       } catch (error) {
         alert(error.response.data);
         navigate("/");
@@ -67,7 +66,11 @@ export default function Transactions() {
       </List>
 
       <Footer>
-        <Button height="114px" fontSize="17px">
+        <Button
+          height="114px"
+          fontSize="17px"
+          onClick={() => navigate("/register-transaction/incoming")}
+        >
           <img src={plusIcon} alt="" />
 
           <span className="button-text">
@@ -76,7 +79,11 @@ export default function Transactions() {
             entrada
           </span>
         </Button>
-        <Button height="114px" fontSize="17px">
+        <Button
+          height="114px"
+          fontSize="17px"
+          onClick={() => navigate("/register-transaction/outgoing")}
+        >
           <img src={minusIcon} alt="" />
           <span className="button-text">
             Nova
