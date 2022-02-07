@@ -30,9 +30,14 @@ function registerTransaction(token, newTransaction) {
   );
 }
 
-function deleteTransaction(token, transactionId) {
-  return axios.delete(
-    `${BASE_URL}/transactions/${transactionId}`,
+function deleteTransaction(token, id) {
+  return axios.delete(`${BASE_URL}/transactions/${id}`, createAuth(token));
+}
+
+function updateTransaction(token, id, updatedTransaction) {
+  return axios.put(
+    `${BASE_URL}/transactions/${id}`,
+    updatedTransaction,
     createAuth(token)
   );
 }
@@ -44,6 +49,7 @@ const api = {
   getTransactions,
   registerTransaction,
   deleteTransaction,
+  updateTransaction,
 };
 
 export default api;

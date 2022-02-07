@@ -115,6 +115,11 @@ export default function Transactions() {
                   deleteTransaction={() =>
                     deleteTransaction(transaction._id, transaction.description)
                   }
+                  updateTransaction={() =>
+                    navigate(
+                      `/transactions/edit/${transaction.type}/${transaction._id}`
+                    )
+                  }
                 />
               );
             })
@@ -133,7 +138,7 @@ export default function Transactions() {
         <Button
           height="114px"
           fontSize="17px"
-          onClick={() => navigate("/register-transaction/incoming")}
+          onClick={() => navigate("/transactions/register/incoming")}
         >
           <img src={plusIcon} alt="" />
 
@@ -146,7 +151,7 @@ export default function Transactions() {
         <Button
           height="114px"
           fontSize="17px"
-          onClick={() => navigate("/register-transaction/outgoing")}
+          onClick={() => navigate("/transactions/register/outgoing")}
         >
           <img src={minusIcon} alt="" />
           <span className="button-text">

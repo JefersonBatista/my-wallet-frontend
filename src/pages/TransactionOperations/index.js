@@ -7,8 +7,9 @@ import { Button, Entry, Title } from "../../styles";
 
 import { Page, Header, Form } from "./style";
 
-export default function RegisterTransaction() {
-  const { type } = useParams();
+export default function TransactionOperations() {
+  const { operation, type, id } = useParams();
+
   const navigate = useNavigate();
 
   const { token } = useAuth();
@@ -22,7 +23,7 @@ export default function RegisterTransaction() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
-  async function handleSubmit(event) {
+  async function handleCreation(event) {
     event.preventDefault();
 
     const newTransactionData = { ...formData };
@@ -38,13 +39,32 @@ export default function RegisterTransaction() {
     }
   }
 
+  async function handleUpdate(event) {
+    event.preventDefault();
+
+    const updatedTransactionData = { ...formData };
+    updatedTransactionData.type = type;
+    updatedTransactionData.value = parseFloat(formData.value);
+
+    try {
+      await api.updateTransaction(token, id, updatedTransactionData);
+
+      navigate("/transactions");
+    } catch (error) {
+      alert(error.response.data);
+    }
+  }
+
   return (
     <Page>
       <Header>
-        <Title>Nova {type === "incoming" ? "entrada" : "saída"}</Title>
+        <Title>
+          {operation === "register" ? "Nova" : "Editar"}{" "}
+          {type === "incoming" ? "entrada" : "saída"}
+        </Title>
       </Header>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={operation === "register" ? handleCreation : handleUpdate}>
         <Entry
           type="number"
           name="value"
@@ -61,7 +81,8 @@ export default function RegisterTransaction() {
         />
         <Button type="submit">
           <span className="button-text">
-            Salvar {type === "incoming" ? "entrada" : "saída"}
+            {operation === "register" ? "Salvar" : "Atualizar"}{" "}
+            {type === "incoming" ? "entrada" : "saída"}
           </span>
         </Button>
       </Form>

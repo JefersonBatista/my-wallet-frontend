@@ -1,6 +1,6 @@
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Transactions from "./Transactions";
-import RegisterTransaction from "./RegisterTransaction";
+import TransactionOperations from "./TransactionOperations";
 
-export { Login, SignUp, Transactions, RegisterTransaction };
+export { Login, SignUp, Transactions, TransactionOperations };

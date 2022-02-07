@@ -6,12 +6,15 @@ export default function Transaction({
   description,
   value,
   deleteTransaction,
+  updateTransaction,
 }) {
   return (
     <TransactionItem>
       <span className="date-and-description">
         <span className="date">{date}</span>
-        <span className="description">{description}</span>
+        <span className="description" onClick={updateTransaction}>
+          {description}
+        </span>
       </span>
       <span>
         <span className={type}>
