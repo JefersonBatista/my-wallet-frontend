@@ -4,7 +4,7 @@ export const TransactionItem = styled.article`
   display: flex;
   justify-content: space-between;
 
-  font-size: 16px;
+  font-size: 17px;
 
   .date {
     margin-right: 10px;

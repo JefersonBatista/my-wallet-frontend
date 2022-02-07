@@ -9,7 +9,7 @@ import plusIcon from "../../icons/plus.svg";
 import minusIcon from "../../icons/minus.svg";
 
 import Transaction from "../../components/Transaction";
-import { TransactionsPage, Header, List, Footer } from "./style";
+import { Page, Header, Container, List, Balance, Footer } from "./style";
 
 export default function Transactions() {
   const navigate = useNavigate();
@@ -17,6 +17,34 @@ export default function Transactions() {
   const { token } = useAuth();
 
   const [transactions, setTransactions] = useState(null);
+
+  const emptyList = transactions?.list.length === 0;
+
+  transactions?.list.sort((t1, t2) => t2.timestamp - t1.timestamp);
+
+  const balance = transactions?.list
+    .map((transaction) => {
+      if (transaction.type === "incoming") {
+        return transaction.value;
+      } else {
+        return -transaction.value;
+      }
+    })
+    .reduce((a, b) => a + b, 0);
+  const balanceStr = balance?.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  function balanceSignal() {
+    if (balance > 0) {
+      return "positive";
+    } else if (balance < 0) {
+      return "negative";
+    } else {
+      return "neutral";
+    }
+  }
 
   async function logout() {
     await api.logout(token);
@@ -29,7 +57,7 @@ export default function Transactions() {
       try {
         const response = await api.getTransactions(token);
         const transactionsData = response.data;
-        transactionsData.list.sort((t1, t2) => t2.timestamp - t1.timestamp);
+        // transactionsData.list.sort((t1, t2) => t2.timestamp - t1.timestamp);
         setTransactions(transactionsData);
       } catch (error) {
         alert(error.response.data);
@@ -40,30 +68,41 @@ export default function Transactions() {
   }, [token]);
 
   if (!transactions) {
-    return <h1>Carregando...</h1>;
+    return (
+      <Header>
+        <Title>Carregando...</Title>
+      </Header>
+    );
   }
 
   return (
-    <TransactionsPage>
+    <Page>
       <Header>
         <Title>Olá, {transactions.user}</Title>
 
         <img src={logoutIcon} alt="logout" onClick={logout} />
       </Header>
 
-      <List>
-        {transactions.list.length === 0 ? (
-          <span className="no-transactions-text">
-            Não há registros de
-            <br />
-            entrada ou saída
-          </span>
-        ) : (
-          transactions.list.map((transaction) => {
-            return <Transaction key={transaction._id} {...transaction} />;
-          })
-        )}
-      </List>
+      <Container>
+        <List>
+          {emptyList === 0 ? (
+            <span className="no-transactions-text">
+              Não há registros de
+              <br />
+              entrada ou saída
+            </span>
+          ) : (
+            transactions.list.map((transaction) => {
+              return <Transaction key={transaction._id} {...transaction} />;
+            })
+          )}
+        </List>
+
+        <Balance>
+          <span className="text">Saldo</span>
+          <span className={balanceSignal()}>{balanceStr}</span>
+        </Balance>
+      </Container>
 
       <Footer>
         <Button
@@ -92,6 +131,6 @@ export default function Transactions() {
           </span>
         </Button>
       </Footer>
-    </TransactionsPage>
+    </Page>
   );
 }
