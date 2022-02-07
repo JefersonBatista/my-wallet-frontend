@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Logo from "../../components/Logo";
 import { Button, Entry, PageLink } from "../../styles";
 
-import { LoginForm, LoginPage } from "./style";
+import { Form, Page } from "./style";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -37,10 +37,10 @@ export default function Login() {
   }
 
   return (
-    <LoginPage>
+    <Page>
       <Logo />
 
-      <LoginForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Entry
           type="email"
           name="email"
@@ -58,9 +58,9 @@ export default function Login() {
         <Button type="submit">
           <span className="button-text">Entrar</span>
         </Button>
-      </LoginForm>
+      </Form>
 
       <PageLink to="/sign-up">Primeira vez? Cadastre-se!</PageLink>
-    </LoginPage>
+    </Page>
   );
 }

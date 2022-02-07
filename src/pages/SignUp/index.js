@@ -4,7 +4,7 @@ import api from "../../services/api";
 import Logo from "../../components/Logo";
 import { Button, Entry, PageLink } from "../../styles";
 
-import { SignUpForm, SignUpPage } from "./style";
+import { Form, Page } from "./style";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
@@ -42,10 +42,10 @@ export default function SignUp() {
   }
 
   return (
-    <SignUpPage>
+    <Page>
       <Logo />
 
-      <SignUpForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Entry
           type="text"
           name="name"
@@ -77,9 +77,9 @@ export default function SignUp() {
         <Button type="submit">
           <span className="button-text">Cadastrar</span>
         </Button>
-      </SignUpForm>
+      </Form>
 
       <PageLink to="/">Já tem uma conta? Entre agora!</PageLink>
-    </SignUpPage>
+    </Page>
   );
 }

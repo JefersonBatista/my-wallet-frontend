@@ -3,8 +3,14 @@ import styled from "styled-components";
 export const TransactionItem = styled.article`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   font-size: 17px;
+
+  .date-and-description {
+    display: flex;
+    align-items: center;
+  }
 
   .date {
     margin-right: 10px;

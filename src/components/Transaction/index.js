@@ -3,7 +3,7 @@ import { TransactionItem } from "./style";
 export default function Transaction({ type, date, description, value }) {
   return (
     <TransactionItem>
-      <span>
+      <span className="date-and-description">
         <span className="date">{date}</span>
         <span className="description">{description}</span>
       </span>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignUpForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -14,7 +14,7 @@ export const SignUpForm = styled.form`
   }
 `;
 
-export const SignUpPage = styled.section`
+export const Page = styled.section`
   display: flex;
   flex-direction: column;
   margin: auto 0;

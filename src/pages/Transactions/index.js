@@ -56,9 +56,7 @@ export default function Transactions() {
     async function getTransactions() {
       try {
         const response = await api.getTransactions(token);
-        const transactionsData = response.data;
-        // transactionsData.list.sort((t1, t2) => t2.timestamp - t1.timestamp);
-        setTransactions(transactionsData);
+        setTransactions(response.data);
       } catch (error) {
         alert(error.response.data);
         navigate("/");
@@ -85,7 +83,7 @@ export default function Transactions() {
 
       <Container>
         <List>
-          {emptyList === 0 ? (
+          {emptyList ? (
             <span className="no-transactions-text">
               Não há registros de
               <br />
@@ -98,10 +96,12 @@ export default function Transactions() {
           )}
         </List>
 
-        <Balance>
-          <span className="text">Saldo</span>
-          <span className={balanceSignal()}>{balanceStr}</span>
-        </Balance>
+        {emptyList || (
+          <Balance>
+            <span className="text">Saldo</span>
+            <span className={balanceSignal()}>{balanceStr}</span>
+          </Balance>
+        )}
       </Container>
 
       <Footer>
