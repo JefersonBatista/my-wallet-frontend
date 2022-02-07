@@ -14,6 +14,7 @@ export const TransactionItem = styled.article`
 
   .date {
     margin-right: 10px;
+
     color: #c6c6c6;
   }
 
@@ -29,5 +30,11 @@ export const TransactionItem = styled.article`
   .outgoing {
     margin-left: 10px;
     color: #c70000;
+  }
+
+  .delete {
+    margin-left: 10px;
+
+    color: #c6c6c6;
   }
 `;

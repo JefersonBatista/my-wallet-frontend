@@ -47,23 +47,40 @@ export default function Transactions() {
   }
 
   async function logout() {
-    await api.logout(token);
-    localStorage.removeItem("token");
-    navigate("/");
+    try {
+      await api.logout(token);
+      localStorage.removeItem("token");
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data);
+    }
   }
 
-  useEffect(() => {
-    async function getTransactions() {
-      try {
-        const response = await api.getTransactions(token);
-        setTransactions(response.data);
-      } catch (error) {
-        alert(error.response.data);
-        navigate("/");
-      }
+  async function deleteTransaction(id, description) {
+    if (!window.confirm(`Deseja mesmo deletar a transação '${description}'?`)) {
+      return;
     }
-    getTransactions();
-  }, [token]);
+
+    try {
+      await api.deleteTransaction(token, id);
+      getTransactions();
+    } catch (error) {
+      alert(error.response.data);
+      navigate("/");
+    }
+  }
+
+  async function getTransactions() {
+    try {
+      const response = await api.getTransactions(token);
+      setTransactions(response.data);
+    } catch (error) {
+      alert(error.response.data);
+      navigate("/");
+    }
+  }
+
+  useEffect(() => getTransactions(), [token]);
 
   if (!transactions) {
     return (
@@ -91,7 +108,15 @@ export default function Transactions() {
             </span>
           ) : (
             transactions.list.map((transaction) => {
-              return <Transaction key={transaction._id} {...transaction} />;
+              return (
+                <Transaction
+                  key={transaction._id}
+                  {...transaction}
+                  deleteTransaction={() =>
+                    deleteTransaction(transaction._id, transaction.description)
+                  }
+                />
+              );
             })
           )}
         </List>
