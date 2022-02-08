@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://jeff-my-wallet.herokuapp.com/";
 
 function createAuth(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
