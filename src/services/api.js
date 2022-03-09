@@ -22,6 +22,10 @@ function getTransactions(token) {
   return axios.get(`${BASE_URL}/transactions`, createAuth(token));
 }
 
+function getTransactionById(token, id) {
+  return axios.get(`${BASE_URL}/transactions/${id}`, createAuth(token));
+}
+
 function registerTransaction(token, newTransaction) {
   return axios.post(
     `${BASE_URL}/transactions`,
@@ -47,6 +51,7 @@ const api = {
   login,
   logout,
   getTransactions,
+  getTransactionById,
   registerTransaction,
   deleteTransaction,
   updateTransaction,

@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
@@ -14,13 +14,34 @@ export default function TransactionOperations() {
 
   const { token } = useAuth();
 
-  const [formData, setFormData] = useState({
-    value: "",
-    description: "",
-  });
+  const [formData, setFormData] = useState(null);
 
-  function handleChange(event) {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  useEffect(() => {
+    async function getTransactionData() {
+      if (operation !== "edit") {
+        setFormData({
+          value: "",
+          description: "",
+        });
+        return;
+      }
+
+      try {
+        const response = await api.getTransactionById(token, id);
+        const { value, description } = response.data;
+        setFormData({ value, description });
+      } catch (error) {
+        alert(error.response.data);
+
+        navigate("/transactions");
+      }
+    }
+
+    getTransactionData();
+  }, [token, id, operation]);
+
+  function handleChange({ target }) {
+    setFormData({ ...formData, [target.name]: target.value });
   }
 
   async function handleCreation(event) {
@@ -53,6 +74,14 @@ export default function TransactionOperations() {
     } catch (error) {
       alert(error.response.data);
     }
+  }
+
+  if (!formData) {
+    return (
+      <Header>
+        <Title>Carregando...</Title>
+      </Header>
+    );
   }
 
   return (
