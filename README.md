@@ -2,7 +2,7 @@
 
 A web app to register your financial transactions, both incomings and outgoings. This app runs upon its back-end, which is at https://github.com/JefersonBatista/my-wallet-backend.
 
-Try it out now at http://my-wallet-frontend-nu.vercel.app
+Try it out now at http://my-wallet-nu.vercel.app
 
 ## About
 
