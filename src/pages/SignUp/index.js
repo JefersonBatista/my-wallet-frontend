@@ -17,15 +17,19 @@ export default function SignUp() {
     repeatPassword: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
 
     if (formData.password !== formData.repeatPassword) {
       alert("Você inseriu senhas diferentes");
+      setLoading(false);
       return;
     }
 
@@ -38,6 +42,7 @@ export default function SignUp() {
       navigate("/");
     } catch (error) {
       alert(error.response.data);
+      setLoading(false);
     }
   }
 
@@ -52,6 +57,7 @@ export default function SignUp() {
           placeholder="Nome"
           onChange={handleChange}
           value={formData.name}
+          disabled={loading}
         />
         <Entry
           type="email"
@@ -59,6 +65,7 @@ export default function SignUp() {
           placeholder="E-mail"
           onChange={handleChange}
           value={formData.email}
+          disabled={loading}
         />
         <Entry
           type="password"
@@ -66,6 +73,7 @@ export default function SignUp() {
           placeholder="Senha"
           onChange={handleChange}
           value={formData.password}
+          disabled={loading}
         />
         <Entry
           type="password"
@@ -73,13 +81,18 @@ export default function SignUp() {
           placeholder="Confirme a senha"
           onChange={handleChange}
           value={formData.repeatPassword}
+          disabled={loading}
         />
-        <Button type="submit">
-          <span className="button-text">Cadastrar</span>
+        <Button type="submit" disabled={loading}>
+          <span className="button-text">
+            {loading ? "Cadastrando..." : "Cadastrar"}
+          </span>
         </Button>
       </Form>
 
-      <PageLink to="/">Já tem uma conta? Entre agora!</PageLink>
+      <PageLink to={loading ? "#" : "/"}>
+        Já tem uma conta? Entre agora!
+      </PageLink>
     </Page>
   );
 }

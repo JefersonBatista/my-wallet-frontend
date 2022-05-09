@@ -15,14 +15,19 @@ export default function TransactionOperations() {
   const { token } = useAuth();
 
   const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getTransactionData() {
+      setLoading(true);
+
       if (operation !== "edit") {
         setFormData({
           value: "",
           description: "",
         });
+
+        setLoading(false);
         return;
       }
 
@@ -30,6 +35,8 @@ export default function TransactionOperations() {
         const response = await api.getTransactionById(token, id);
         const { value, description } = response.data;
         setFormData({ value, description });
+
+        setLoading(false);
       } catch (error) {
         alert(error.response.data);
 
@@ -46,6 +53,7 @@ export default function TransactionOperations() {
 
   async function handleCreation(event) {
     event.preventDefault();
+    setLoading(true);
 
     const newTransactionData = { ...formData };
     newTransactionData.type = type;
@@ -57,11 +65,13 @@ export default function TransactionOperations() {
       navigate("/transactions");
     } catch (error) {
       alert(error.response.data);
+      setLoading(false);
     }
   }
 
   async function handleUpdate(event) {
     event.preventDefault();
+    setLoading(true);
 
     const updatedTransactionData = { ...formData };
     updatedTransactionData.type = type;
@@ -73,6 +83,7 @@ export default function TransactionOperations() {
       navigate("/transactions");
     } catch (error) {
       alert(error.response.data);
+      setLoading(false);
     }
   }
 
@@ -100,6 +111,7 @@ export default function TransactionOperations() {
           placeholder="Valor"
           onChange={handleChange}
           value={formData.value}
+          disabled={loading}
         />
         <Entry
           type="text"
@@ -107,10 +119,17 @@ export default function TransactionOperations() {
           placeholder="Descrição"
           onChange={handleChange}
           value={formData.description}
+          disabled={loading}
         />
-        <Button type="submit">
+        <Button type="submit" disabled={loading}>
           <span className="button-text">
-            {operation === "register" ? "Salvar" : "Atualizar"}{" "}
+            {operation === "register"
+              ? loading
+                ? "Salvando..."
+                : "Salvar"
+              : loading
+              ? "Atualizando..."
+              : "Atualizar"}{" "}
             {type === "incoming" ? "entrada" : "saída"}
           </span>
         </Button>

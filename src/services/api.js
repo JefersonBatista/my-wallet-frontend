@@ -1,46 +1,45 @@
 import axios from "axios";
 
-const BASE_URL = "https://jeff-my-wallet.herokuapp.com";
+// const BASE_URL = "https://jeff-my-wallet.herokuapp.com";
+const instance = axios.create({
+  baseURL: "http://localhost:5000",
+});
 
 function createAuth(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
 }
 
 function signUp(newUser) {
-  return axios.post(`${BASE_URL}/sign-up`, newUser);
+  return instance.post(`/sign-up`, newUser);
 }
 
 function login(login) {
-  return axios.post(`${BASE_URL}/login`, login);
+  return instance.post(`/login`, login);
 }
 
 function logout(token) {
-  return axios.post(`${BASE_URL}/logout`, {}, createAuth(token));
+  return instance.post(`/logout`, {}, createAuth(token));
 }
 
 function getTransactions(token) {
-  return axios.get(`${BASE_URL}/transactions`, createAuth(token));
+  return instance.get(`/transactions`, createAuth(token));
 }
 
 function getTransactionById(token, id) {
-  return axios.get(`${BASE_URL}/transactions/${id}`, createAuth(token));
+  return instance.get(`/transactions/${id}`, createAuth(token));
 }
 
 function registerTransaction(token, newTransaction) {
-  return axios.post(
-    `${BASE_URL}/transactions`,
-    newTransaction,
-    createAuth(token)
-  );
+  return instance.post(`/transactions`, newTransaction, createAuth(token));
 }
 
 function deleteTransaction(token, id) {
-  return axios.delete(`${BASE_URL}/transactions/${id}`, createAuth(token));
+  return instance.delete(`/transactions/${id}`, createAuth(token));
 }
 
 function updateTransaction(token, id, updatedTransaction) {
-  return axios.put(
-    `${BASE_URL}/transactions/${id}`,
+  return instance.put(
+    `/transactions/${id}`,
     updatedTransaction,
     createAuth(token)
   );

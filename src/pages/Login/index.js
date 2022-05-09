@@ -18,12 +18,15 @@ export default function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
 
     try {
       const response = await api.login(formData);
@@ -33,6 +36,7 @@ export default function Login() {
       navigate("/transactions");
     } catch (error) {
       alert(error.response.data);
+      setLoading(false);
     }
   }
 
@@ -47,6 +51,7 @@ export default function Login() {
           placeholder="E-mail"
           onChange={handleChange}
           value={formData.email}
+          disabled={loading}
         />
         <Entry
           type="password"
@@ -54,13 +59,18 @@ export default function Login() {
           placeholder="Senha"
           onChange={handleChange}
           value={formData.password}
+          disabled={loading}
         />
-        <Button type="submit">
-          <span className="button-text">Entrar</span>
+        <Button type="submit" disabled={loading}>
+          <span className="button-text">
+            {loading ? "Entrando..." : "Entrar"}
+          </span>
         </Button>
       </Form>
 
-      <PageLink to="/sign-up">Primeira vez? Cadastre-se!</PageLink>
+      <PageLink to={loading ? "#" : "/sign-up"}>
+        Primeira vez? Cadastre-se!
+      </PageLink>
     </Page>
   );
 }
