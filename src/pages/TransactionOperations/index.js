@@ -130,7 +130,7 @@ export default function TransactionOperations() {
               : loading
               ? "Atualizando..."
               : "Atualizar"}{" "}
-            {type === "incoming" ? "entrada" : "saída"}
+            {loading ? "" : type === "incoming" ? "entrada" : "saída"}
           </span>
         </Button>
       </Form>

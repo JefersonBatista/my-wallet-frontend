@@ -20,6 +20,8 @@ export const TransactionItem = styled.article`
 
   .description {
     color: black;
+
+    cursor: pointer;
   }
 
   .incoming {
@@ -36,5 +38,7 @@ export const TransactionItem = styled.article`
     margin-left: 10px;
 
     color: #c6c6c6;
+
+    cursor: pointer;
   }
 `;
