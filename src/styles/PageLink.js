@@ -8,6 +8,8 @@ const PageLink = styled(Link)`
   font-size: 15px;
   text-decoration: none;
   color: white;
+
+  cursor: ${({ to }) => to !== "#" || "default"};
 `;
 
 export default PageLink;

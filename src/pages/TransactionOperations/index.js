@@ -5,7 +5,7 @@ import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { Button, Entry, Title } from "../../styles";
 
-import { Page, Header, Form } from "./style";
+import { Page, Header, Form, Options } from "./style";
 
 export default function TransactionOperations() {
   const { operation, type, id } = useParams();
@@ -121,18 +121,27 @@ export default function TransactionOperations() {
           value={formData.description}
           disabled={loading}
         />
-        <Button type="submit" disabled={loading}>
-          <span className="button-text">
-            {operation === "register"
-              ? loading
-                ? "Salvando..."
-                : "Salvar"
-              : loading
-              ? "Atualizando..."
-              : "Atualizar"}{" "}
-            {loading ? "" : type === "incoming" ? "entrada" : "saída"}
-          </span>
-        </Button>
+        <Options>
+          <Button type="submit" disabled={loading}>
+            <span className="button-text">
+              {operation === "register"
+                ? loading
+                  ? "Salvando..."
+                  : "Salvar"
+                : loading
+                ? "Atualizando..."
+                : "Atualizar"}{" "}
+              {loading ? "" : type === "incoming" ? "entrada" : "saída"}
+            </span>
+          </Button>
+          <Button
+            type="button"
+            disabled={loading}
+            onClick={() => navigate("/transactions")}
+          >
+            <span className="button-text">Cancelar</span>
+          </Button>
+        </Options>
       </Form>
     </Page>
   );

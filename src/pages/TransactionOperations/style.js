@@ -24,3 +24,10 @@ export const Form = styled.form`
     align-self: center;
   }
 `;
+
+export const Options = styled.div`
+  display: flex;
+  gap: 15px;
+
+  width: 100%;
+`;

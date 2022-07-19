@@ -15,6 +15,8 @@ const Button = styled.button`
   font-weight: bold;
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "20px")};
   color: white;
+
+  cursor: ${({ disabled }) => disabled || "pointer"};
 `;
 
 export default Button;

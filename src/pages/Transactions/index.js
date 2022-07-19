@@ -10,6 +10,7 @@ import minusIcon from "../../icons/minus.svg";
 
 import Transaction from "../../components/Transaction";
 import { Page, Header, Container, List, Balance, Footer } from "./style";
+import LogoutIcon from "../../components/LogoutIcon";
 
 export default function Transactions() {
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ export default function Transactions() {
       <Header>
         <Title>Olá, {transactions.user}</Title>
 
-        <img src={logoutIcon} alt="logout" onClick={logout} />
+        <LogoutIcon onClick={logout}></LogoutIcon>
       </Header>
 
       <Container>
