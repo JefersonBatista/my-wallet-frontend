@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { Button, Title } from "../../styles";
-import logoutIcon from "../../icons/logout.svg";
 import plusIcon from "../../icons/plus.svg";
 import minusIcon from "../../icons/minus.svg";
 
@@ -45,6 +45,10 @@ export default function Transactions() {
     } else {
       return "neutral";
     }
+  }
+
+  function timestampToLocalDateString(timestamp) {
+    return dayjs(timestamp).format("DD/MM");
   }
 
   async function logout() {
@@ -113,6 +117,7 @@ export default function Transactions() {
                 <Transaction
                   key={transaction._id}
                   {...transaction}
+                  date={timestampToLocalDateString(transaction.timestamp)}
                   deleteTransaction={() =>
                     deleteTransaction(transaction._id, transaction.description)
                   }

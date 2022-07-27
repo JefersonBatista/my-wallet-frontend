@@ -3,10 +3,10 @@ import styled from "styled-components";
 const Button = styled.button`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${({ height }) => (height ? "space-between" : "center")};
 
   width: 100%;
-  height: ${({ height }) => (height ? height : "46px")};
+  height: ${({ height }) => (height ? height : "auto")};
   padding: 10px;
   border-radius: 5px;
   border-style: none;
