@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://jeff-my-wallet.herokuapp.com",
+  baseURL: "https://my-wallet-26nd.onrender.com",
 });
 
 function createAuth(token) {
