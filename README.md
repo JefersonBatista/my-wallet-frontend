@@ -1,8 +1,12 @@
 # My Wallet
 
-A web app to register your financial transactions, both incomings and outgoings. This app runs upon its back-end, which is at https://github.com/JefersonBatista/my-wallet-backend.
+## Notice
 
-Try it out now at http://my-wallet-nu.vercel.app
+This project was migrated to the Vue Framework at https://github.com/JefersonBatista/my-wallet-frontend-2.
+
+## Description
+
+A web app to register your financial transactions, both incomings and outgoings. This app runs upon its back-end, which is at https://github.com/JefersonBatista/my-wallet-backend.
 
 ## About
 
